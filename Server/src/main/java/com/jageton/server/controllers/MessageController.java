@@ -44,14 +44,14 @@ public class MessageController {
     public List<Message> getDialogHistory(@RequestBody Map<String, String> jsonToken) {
         String token = jsonToken.get("token");
         System.out.println("getDialogHistory()  has been invoked; token is " + token);
+        User user = userRepository.findByToken(token);
 
-        List<User> list = userRepository.findByToken(token);// -> User
-        if (list.size() == 0) {
-            System.out.println("Token not found !");
+        if (user == null) {
+            System.out.println("User not found !");
             // return/throw exception ?
         }
 
-        String login = list.get(0).getLogin();
+        String login = user.getLogin();
         return messageRepository.findByFromOrToOrderById(login, login);
     }
 

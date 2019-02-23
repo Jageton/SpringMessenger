@@ -18,6 +18,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
-        registry.addEndpoint("/spring_server");
+        registry.addEndpoint("/spring_server/web").withSockJS();
+        registry.addEndpoint("/spring_server/android");
     }
 }

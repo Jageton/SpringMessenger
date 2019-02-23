@@ -5,12 +5,11 @@ import com.jageton.server.data.UserData;
 import com.jageton.server.entities.User;
 import com.jageton.server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/chat")
+@Controller
+@RequestMapping("/login")
 public class AuthController {
 
     @Autowired
@@ -20,31 +19,37 @@ public class AuthController {
 
     @GetMapping
     public String login() {
-        return "chat.html";
+        return "login.html";
     }
 
     @PostMapping
     @ResponseBody
     public UserData getToken(@RequestBody String login) {
-        System.out.println("getToken()  has been invoked; chat is " + login);
+        System.out.println("getToken()  has been invoked; login is " + login);
         String token;
-        List<User> list = userRepository.findByLoginOrderById(login);// redo on User.class
+        User user = userRepository.findByLogin(login);
 
-        if (list.size() == 0) {
-            token = tokenGenerator.generate();// generate token;
+        if (user == null) {
+            token = generateToken();
             userRepository.save(new User(login, token));
         } else {
-            User user = list.get(0);
             token = user.getToken();
-            if (token.equals("")) {
-                token = tokenGenerator.generate();// generate token;
-                // check generated token on uniq;
-                user.setToken(token);
-                userRepository.save(user);
-            }
         }
 
         return new UserData(login, token);
+    }
+
+    private String generateToken() {
+        User user;
+        String token;
+
+        // check generated token on unique:
+        do {
+            token = tokenGenerator.generate();
+            user = userRepository.findByToken(token);
+        } while (user == null);
+
+        return token;
     }
 
 }

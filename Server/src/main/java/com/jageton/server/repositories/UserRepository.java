@@ -9,12 +9,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     List<User> findAll();
 
-    List<User> findByLogin(String login);
+    User findByLogin(String login);
 
-    List<User> findByLoginOrderById(String login);
-
-    List<User> findByToken(String token);
-
-    List<User> findByTokenOrderById(String token);
+    User findByToken(String token);
 
 }
