@@ -39,7 +39,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "Message[id=%d, login='%s', token='%s']",
+                "Message[id=%d, chat='%s', token='%s']",
                 id, login, token);
     }
 

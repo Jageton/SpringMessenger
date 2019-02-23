@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserData {
 
-    @SerializedName("login")
+    @SerializedName("chat")
     private String login;
 
     @SerializedName("token")

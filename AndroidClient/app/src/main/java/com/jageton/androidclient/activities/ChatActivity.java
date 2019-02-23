@@ -49,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
         jsonParser = new Gson();
 
         Intent intent = this.getIntent();
-        login = intent.getStringExtra("login");
+        login = intent.getStringExtra("chat");
         token = intent.getStringExtra("token");
 
         stompConnection();

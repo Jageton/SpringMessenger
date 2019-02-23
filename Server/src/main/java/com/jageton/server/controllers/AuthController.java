@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/chat")
 public class AuthController {
 
     @Autowired
@@ -20,13 +20,13 @@ public class AuthController {
 
     @GetMapping
     public String login() {
-        return "login.html";
+        return "chat.html";
     }
 
     @PostMapping
     @ResponseBody
     public UserData getToken(@RequestBody String login) {
-        System.out.println("getToken()  has been invoked; login is " + login);
+        System.out.println("getToken()  has been invoked; chat is " + login);
         String token;
         List<User> list = userRepository.findByLoginOrderById(login);// redo on User.class
 
