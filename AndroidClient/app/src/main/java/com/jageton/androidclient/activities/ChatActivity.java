@@ -24,7 +24,7 @@ import ua.naiksoftware.stomp.StompClient;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String WS_URL = "ws://192.168.1.33:8080/spring_server";//10.0.2.2 //localhost
+    private static final String WS_URL = "ws://192.168.1.34:8080/spring_server/android";//10.0.2.2 //localhost
     private static final String recipient = "Server";
 
     private MessageAdapter messageAdapter;
@@ -49,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
         jsonParser = new Gson();
 
         Intent intent = this.getIntent();
-        login = intent.getStringExtra("chat");
+        login = intent.getStringExtra("login");
         token = intent.getStringExtra("token");
 
         stompConnection();
