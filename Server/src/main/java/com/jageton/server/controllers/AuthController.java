@@ -25,6 +25,7 @@ public class AuthController {
     @PostMapping
     @ResponseBody
     public UserData getToken(@RequestBody String login) {
+        System.out.println("!");
         String token;
         User user = userRepository.findByLogin(login);
 
@@ -46,7 +47,7 @@ public class AuthController {
         do {
             token = tokenGenerator.generate();
             user = userRepository.findByToken(token);
-        } while (user == null);
+        } while (user != null);
 
         return token;
     }

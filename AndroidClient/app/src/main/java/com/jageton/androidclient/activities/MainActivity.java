@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
-    private static final String AUTH_URL = "http://192.168.1.33:8080/chat";//10.0.2.2 //localhost
+    private static final String AUTH_URL = "http://192.168.1.34:8080/login";//10.0.2.2 //localhost
     private EditText editText;
     private TextView tokenTextView;
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openDialog(UserData data) {
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("chat", data.getLogin());
+        intent.putExtra("login", data.getLogin());
         intent.putExtra("token", data.getToken());
         startActivity(intent);
     }
