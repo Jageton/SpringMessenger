@@ -25,7 +25,6 @@ public class AuthController {
     @PostMapping
     @ResponseBody
     public UserData getToken(@RequestBody String login) {
-        System.out.println("!");
         String token;
         User user = userRepository.findByLogin(login);
 
