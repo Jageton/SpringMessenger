@@ -1,0 +1,44 @@
+logging:
+    level:
+        ROOT: INFO
+        com.jageton.server: INFO
+
+spring:
+    devtools:
+        restart:
+            enabled: false
+        livereload:
+            enabled: false
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:h2:file:./target/h2db/db/hipster;DB_CLOSE_DELAY=-1
+        username: chat
+        password:
+        hikari:
+            poolName: Hikari
+            auto-commit: false
+    jpa:
+        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+        database: H2
+        show-sql: true
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+            hibernate.cache.hazelcast.instance_name: hipster
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.hazelcast.use_lite_member: true
+    thymeleaf:
+        cache: true
+
+server:
+    port: 8080
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+        min-response-size: 1024
+
+# application:

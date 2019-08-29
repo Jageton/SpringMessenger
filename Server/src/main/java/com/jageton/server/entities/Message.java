@@ -3,11 +3,18 @@ package com.jageton.server.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "dialog", schema = "messenger_sch")
+@Table(name = "messages")
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            generator = "msg_sequence",
+            strategy = GenerationType.SEQUENCE
+    )
+    @SequenceGenerator(
+            name = "msg_sequence",
+            allocationSize = 10
+    )
     private Integer id;
     @Column(name = "sender")
     private String from;
