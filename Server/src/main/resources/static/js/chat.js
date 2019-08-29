@@ -24,7 +24,6 @@ Vue.component('loginForm', {
                     token = data.token;
                     connect(data.token);
                 })
-            )
         }
     }
 })
