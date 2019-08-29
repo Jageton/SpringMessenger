@@ -1,6 +1,6 @@
 var loginApi = Vue.resource('/login')
-var token = null
-var login = null
+var token = null;
+var login = null;
 
 Vue.component('loginForm', {
     data: function() {
@@ -18,8 +18,9 @@ Vue.component('loginForm', {
         sendLogin: function() {
             var message = { login: this.text }
             login = this.text;
-            loginApi.save({}, login).then(result =>
-                result.json().then(data => {
+            loginApi.save({}, login)
+                .then(result => result.json())
+                .then(data => {
                     token = data.token;
                     connect(data.token);
                 })
@@ -37,8 +38,7 @@ function connect(token){
     stompClient.connect({}, frame => {
         stompClient.subscribe('/topic/activity', messages => {
             var messags = JSON.parse(messages.body)
-            messags.forEach(message =>
-                handler(message))
+            messags.forEach(message => handler(message))
         })
         auth(token)
     })

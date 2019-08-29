@@ -1,23 +1,25 @@
 package com.jageton.server.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users", schema = "messenger_sch")
+@Table(name = "users")
 public class User {
 
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String login;
     private String token;
+    private String login;
 
     public User() {
     }
 
-    public User(String login, String token) {
+    public User(String login) {
         this.login = login;
-        this.token = token;
     }
 
     public String getLogin() {
@@ -38,9 +40,9 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format(
-                "Message[id=%d, chat='%s', token='%s']",
-                id, login, token);
+        return "User{" +
+                "token='" + token + '\'' +
+                ", login='" + login + '\'' +
+                '}';
     }
-
 }
